@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reader.mapper.UserMapper">
+    <resultMap id="User" type="com.reader.model.User">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="sex" column="sex"/>
+        <id property="email" column="email"/>
+        <id property="password" column="password"/>
+        <id property="remark" column="remark"/>
+        <id property="level" column="level"/>
+        <id property="regist_time" column="regist_time"/>
+        <id property="last_login_time" column="last_login_time"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="com.reader.model.User">
+        INSERT INTO user(name,email,password) VALUES (#{name},#{email},#{password})
+    </insert>
+    <!--批量删除用户-->
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+    <update id="updateUser" parameterType="com.reader.model.User">
+--         UPDATE user SET
+--         name=#{name},sex=#{sex},email=#{email},password=#{password},remark=#{remark},level=#{level}
+--         WHERE id=#{id}
+           UPDATE user
+           <set>
+               <if test="name != null">
+                   name=#{name,jdbcType=VARCHAR},
+               </if>
+               <if test="sex != null">
+                   sex=#{sex}
+               </if>
+               <if test="email != null">
+                   email=#{email}
+               </if>
+               <if test="password != null">
+                   password=#{password}
+               </if>
+               <if test="remark != null">
+                   ramark=#{remark}
+               </if>
+               <if test="level != null">
+                   level=#{level}
+               </if>
+               <if test="last_login_time != null">
+                   last_login_time=#{last_login_time}
+               </if>
+           </set>
+        WHERE id = #{id}
+    </update>
+    <!--用于登录验证-->
+    <select id="getUser" parameterType="com.reader.model.User" resultMap="User">
+        select
+		* from user where name=#{name} and password=#{password}
+    </select>
+    <!--通过分页批量查询用户信息-->
+    <select id="queryUserList" parameterType="com.reader.util.Page" resultMap="User">
+        SELECT * FROM user
+        <where>
+            1=1
+            <if test="keyWord != '' and keyType=='name' ">
+                AND name LIKE '%' #{keyWord} '%'
+            </if>
+        </where>
+        order by id
+        LIMIT #{start},#{rows}
+    </select>
+
+</mapper>
