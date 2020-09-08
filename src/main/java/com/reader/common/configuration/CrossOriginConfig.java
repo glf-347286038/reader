@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CrossOriginConfig implements WebMvcConfigurer {
     static final String ORIGINS[] = new String[] {"GET","POST","PUT","DELETE"};
-    public void addCrosMapping(CorsRegistry registry){
+    public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
                 //.allowedOrigins("http://localhost:8085")
                 .allowedOrigins("*")  //支持的域

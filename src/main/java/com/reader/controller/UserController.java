@@ -29,7 +29,7 @@ public class UserController {
      *  前端请求传Json对象则后端使用@RequestParam
      *  前端请求传Json对象的字符串则后端使用@RequestBody
      */
-    @CrossOrigin
+//    @CrossOrigin
     @RequestMapping("/login")
     public String getUser(@RequestBody User user) {
         if(userService.getUser(user)!=null){

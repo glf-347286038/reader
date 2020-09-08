@@ -17,7 +17,7 @@ public interface UserMapper {
      * @Date 2020-08-30 00:11:30
      * 根据用户名批量删除
     */
-    int deleteUserById(List<String> list);
+    int deleteUserById(List<Integer> list);
 
     int updateUser(User user);
 
