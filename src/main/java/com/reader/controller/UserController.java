@@ -2,18 +2,21 @@ package com.reader.controller;
 
 import com.reader.model.User;
 import com.reader.service.UserService;
+import com.reader.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
-//    public int addUser(User user) {
-//        return 0;
-//    }
+    @PutMapping("/addUser")
+    public int addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
 
 //    public int deleteUserById(Integer userId) {
 //        return 0;
@@ -29,8 +32,12 @@ public class UserController {
      *  前端请求传Json对象则后端使用@RequestParam
      *  前端请求传Json对象的字符串则后端使用@RequestBody
      */
-//    @CrossOrigin
-    @RequestMapping("/login")
+    /**
+     * @Author:高凌峰
+     * @Date 2020-09-08 21:27:42
+     * 登录检查
+    */
+    @PostMapping("/login")
     public String getUser(@RequestBody User user) {
         if(userService.getUser(user)!=null){
             /**
@@ -42,7 +49,45 @@ public class UserController {
         }
     }
 
-//    public List<User> queryUser() {
-//        return null;
-//    }
+    //查询所有用户
+    //get请求不支持@RequestBody
+    @GetMapping("/queryUserList")
+    public List<User> queryUser(@RequestParam(value="keyWord") String username,
+                                @RequestParam("keyType") String keyType) {
+        Page page = new Page();
+        page.setKeyWord(username);
+        page.setKeyType(keyType);
+        System.out.println(page.toString()+page.getPage());
+        List<User> list = new ArrayList<>();
+        list = userService.queryUserList(page);
+        System.out.println(list);
+        return userService.queryUserList(page);
+    }
+
+
+
+
+
+    /**
+     * @Author:高凌峰
+     * @Date 2020-09-08 21:58:14
+     * 测试resultful
+    */
+    @PostMapping("/postApi/{id}")
+    public String testPost(@PathVariable String id){
+        return "postresultful成功";
+    }
+
+    @PutMapping("/putApi")
+    public String testPut(){
+        return "putResultful成功！！！！";
+    }
+
+    @DeleteMapping("/deleteApi/{id}")
+    public String testDelete(){
+        return "deleteResultful成功！！！！";
+    }
+
+
+
 }

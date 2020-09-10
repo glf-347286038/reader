@@ -3,6 +3,7 @@ package com.reader.service.impl;
 import com.reader.mapper.UserMapper;
 import com.reader.model.User;
 import com.reader.service.UserService;
+import com.reader.util.Page;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> queryUserList() {
-        return null;
+    public List<User> queryUserList(Page page) {
+        return userMapper.queryUserList(page);
     }
 }

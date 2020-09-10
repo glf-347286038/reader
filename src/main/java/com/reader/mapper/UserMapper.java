@@ -1,6 +1,7 @@
 package com.reader.mapper;
 
 import com.reader.model.User;
+import com.reader.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -33,5 +34,5 @@ public interface UserMapper {
      * @Date 2020-08-29 23:25:24
      * 批量查询出所有用户数据
     */
-    List<User> queryUserList();
+    List<User> queryUserList(Page page);
 }

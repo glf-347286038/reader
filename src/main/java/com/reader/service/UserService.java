@@ -1,6 +1,7 @@
 package com.reader.service;
 
 import com.reader.model.User;
+import com.reader.util.Page;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface UserService {
      * 查询所有用户信息
      * @return
      */
-    List<User> queryUserList();
+    List<User> queryUserList(Page page);
 }
