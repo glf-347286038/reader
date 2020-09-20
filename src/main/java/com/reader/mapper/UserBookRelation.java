@@ -1,7 +1,7 @@
 package com.reader.mapper;
 
-import com.reader.model.Book;
-import com.reader.model.User;
+import com.reader.entity.Book;
+import com.reader.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
