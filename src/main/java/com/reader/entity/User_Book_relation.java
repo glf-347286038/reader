@@ -1,4 +1,4 @@
-package com.reader.model;
+package com.reader.entity;
 
 public class User_Book_relation {
     Integer id;

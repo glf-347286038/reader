@@ -1,6 +1,6 @@
 package com.reader.mapper;
 
-import com.reader.model.User;
+import com.reader.entity.User;
 import com.reader.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 

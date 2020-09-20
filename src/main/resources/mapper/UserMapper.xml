@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.reader.mapper.UserMapper">
-    <resultMap id="User" type="com.reader.model.User">
+    <resultMap id="User" type="com.reader.entity.User">
         <id property="id" column="id"/>
         <id property="name" column="name"/>
         <id property="sex" column="sex"/>
@@ -14,14 +14,14 @@
         <id property="last_login_time" column="last_login_time"/>
     </resultMap>
 
-    <insert id="addUser" parameterType="com.reader.model.User">
+    <insert id="addUser" parameterType="com.reader.entity.User">
         INSERT INTO user(name,email,password) VALUES (#{name},#{email},#{password})
     </insert>
     <!--批量删除用户-->
     <delete id="deleteUserById" parameterType="java.lang.Integer">
         DELETE FROM user WHERE id = #{id}
     </delete>
-    <update id="updateUser" parameterType="com.reader.model.User">
+    <update id="updateUser" parameterType="com.reader.entity.User">
 --         UPDATE user SET
 --         name=#{name},sex=#{sex},email=#{email},password=#{password},remark=#{remark},level=#{level}
 --         WHERE id=#{id}
@@ -52,7 +52,7 @@
         WHERE id = #{id}
     </update>
     <!--用于登录验证-->
-    <select id="getUser" parameterType="com.reader.model.User" resultMap="User">
+    <select id="getUser" parameterType="com.reader.entity.User" resultMap="User">
         select
 		* from user where name=#{name} and password=#{password}
     </select>

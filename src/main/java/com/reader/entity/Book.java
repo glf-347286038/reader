@@ -1,4 +1,4 @@
-package com.reader.model;
+package com.reader.entity;
 
 import java.util.Date;
 

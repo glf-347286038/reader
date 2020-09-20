@@ -1,7 +1,7 @@
 package com.reader.service.impl;
 
 import com.reader.mapper.UserMapper;
-import com.reader.model.User;
+import com.reader.entity.User;
 import com.reader.service.UserService;
 import com.reader.util.Page;
 import org.springframework.stereotype.Service;
