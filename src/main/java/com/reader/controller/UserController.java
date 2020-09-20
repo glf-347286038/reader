@@ -51,11 +51,15 @@ public class UserController {
 
     //查询所有用户
     //get请求不支持@RequestBody
-    @GetMapping("/queryUserList")
-    public List<User> queryUser(@RequestParam(value="keyWord") String username,
+    @GetMapping("/queryUserList/{name}")
+    public List<User> queryUser(@PathVariable("name")
+                                @RequestParam(value="keyWord") String keyword,
                                 @RequestParam("keyType") String keyType) {
         Page page = new Page();
-        page.setKeyWord(username);
+        if("".equals(keyword) || keyword==null){
+            return null;
+        }
+        page.setKeyWord(keyword);
         page.setKeyType(keyType);
         System.out.println(page.toString()+page.getPage());
         List<User> list = new ArrayList<>();
@@ -78,8 +82,9 @@ public class UserController {
         return "postresultful成功";
     }
 
-    @PutMapping("/putApi")
-    public String testPut(){
+    @PutMapping("/putApi/{path}")
+    public String testPut(@PathVariable("path") String path){
+        System.out.println(path+"vvvvvvvvvvvvvvvvvvvvvvvvv");
         return "putResultful成功！！！！";
     }
 
